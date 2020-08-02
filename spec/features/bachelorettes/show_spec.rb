@@ -10,15 +10,15 @@ RSpec.describe "When I visit a bachelorette's show page", type: :feature do
   end
 
   it "I see that bachelorette's name, season #, season description, and a link to see that bachelorette's contestants." do
-    visit "/bachelorettes/#{@bachelorette_1}"
+    visit "/bachelorettes/#{@bachelorette_1.id}"
     expect(page).to have_content(@bachelorette_1.name)
-    expect(page).to have_content("Season #{@bachelorette_1.season} - #{@@bachelorette_1.season_description}")
+    expect(page).to have_content("Season #{@bachelorette_1.season_number} - #{@bachelorette_1.season_description}")
     expect(page).to have_link("#{@bachelorette_1.name}'s Contestants")
   end
 
   it "And when I click on that link, I'm taken to an index page for that bachelorette's contestants." do
-    visit "/bachelorettes/#{@bachelorette_1}"
+    visit "/bachelorettes/#{@bachelorette_1.id}"
     click_on "#{@bachelorette_1.name}'s Contestants"
-    expect(current_path).to eq("/bachelorettes/#{@bachelorette_1}/contestants")
+    expect(current_path).to eq("/bachelorettes/#{@bachelorette_1.id}/contestants")
   end
 end
