@@ -30,4 +30,11 @@ RSpec.describe "When I visit a bachelorette's contestants index page", type: :fe
     end
     expect(current_path).to eq("/contestants/#{@contestant_1.id}")
   end
+
+  it "I see a list of all contestants' unique hometowns." do
+    @contestant_4 = @bachelorette_1.contestants.create!(name: "Mr Colorado", age: 46, hometown: "Denver, CO")
+    @contestant_4 = @bachelorette_1.contestants.create!(name: "Mr California", age: 46, hometown: "Los Angeles, CA")
+    visit "/bachelorettes/#{@bachelorette_1.id}/contestants"
+    expect(page).to have_content("All hometowns: Denver, CO; Irving, TX; Los Angeles, CA")
+  end
 end
